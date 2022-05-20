@@ -1,0 +1,24 @@
+{
+  "name": "wordle_fs_srv",
+  "version": "3.0.0",
+  "description": "Wordle fullstack",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^28.1.0",
+    "nodemon": "^2.0.16"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhema42/wordle_fs.git"
+  },
+  "author": "Mats Hemå",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhema42/wordle_fs/issues"
+  },
+  "homepage": "https://github.com/mhema42/wordle_fs#readme"
+}
