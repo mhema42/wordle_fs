@@ -1,14 +1,19 @@
 {
+  "type": "module",
   "name": "wordle_fs_srv",
   "version": "3.0.0",
   "description": "Wordle fullstack",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.18.1"
+  },
   "devDependencies": {
     "jest": "^28.1.0",
     "nodemon": "^2.0.16"
   },
   "scripts": {
+    "dev": "nodemon .",
+    "start": "node .",
     "test": "npm test"
   },
   "repository": {
