@@ -5,7 +5,8 @@
   "description": "Wordle fullstack",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "node-fetch": "^3.2.4"
   },
   "devDependencies": {
     "jest": "^28.1.0",
