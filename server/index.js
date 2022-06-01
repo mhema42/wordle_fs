@@ -1,5 +1,7 @@
 import express from "express";
 import fs from "fs/promises";
+// import { getRanWord } from "./getRanWord.js";
+
 
 const app = express();
 
@@ -16,5 +18,18 @@ app.get("/highscore", async (req, res) => {
     res.type("html");
     res.send(filebuf);
 });
+
+/* app.get("/ranword", (req, res) => {
+    const wordLength = 5;
+    const word = getRanWord(wordLength);
+    // const word = "hej"
+    console.log(word)
+  
+    res.send(word);
+  
+    res.json({
+      word,
+    });
+  }); */
 
 app.listen(5080);
