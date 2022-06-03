@@ -12,19 +12,20 @@ function App() {
   const [chkWord, wordle] = useState("");
   const [guesses, setGuess] = useState([]);
   const [guessesResults, SetGuessResult] = useState([]);
-
-    // Start game
+  const [name, setName] = useState("");
+ 
+  // Start game
   const [isToggled, toggle] = useToggle(false);
   if (isToggled === true) {
     setWord(getWord());
     toggle(false);
   }
-  
+
   // timer
   const [startTime] = useState(new Date());
   const [gameState, setGameState] = useState("playing");
   const [endTime, setEndtime] = useState(null);
- 
+
   // split correctWord to array and add object properties
   let correctLetters = correctWord.split("").map((letter, index) => ({
     ...index,
@@ -122,19 +123,50 @@ function App() {
   // set gamestate correctGuess/done and render result
   if (gameState === "correctGuess") {
     const duration = Math.round((endTime - startTime) / 1000);
+
+    const numGuess = guesses.length;
+    const wordLength = correctLetters.length;
+
+    async function apiHighscore() {
+      await fetch("/api/highscore", {
+        method: "POST",
+        body: JSON.stringify({
+          name,
+          numGuess,
+          duration,
+          wordLength,
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+
+      return (
+        <div className="done">
+          <h1>You have finished the Game</h1>
+        </div>
+      );
+    }
+    
     return (
       <div className="correctGuess">
         <p>Your guess was correct, congratulation :)</p>
         <span>Number of guesses: </span> {guesses.length}
         <p>Duration: {duration}s</p>
+        <form onSubmit={apiHighscore}>
+          <div>
+            <input
+              autoComplete="Fyll i ditt namn"
+              placeholder="Namn"
+              required
+              type="text"
+              value={name}
+              onChange={(ev) => setName(ev.target.value)}
+            />
+          </div>
+        </form>
       </div>
     )
-  } else if (gameState === "done") {
-    return (
-      <div className="done">
-        <h1>You have finished the Game</h1>
-      </div>
-    );
   }
 
   // render game
@@ -145,12 +177,12 @@ function App() {
         <h1>Welcome to Wordle</h1>
         <button onClick={toggle} autoFocus >Start game</button>
         <p>{correctWord}</p>
-        <CountUp end={1000} duration="1250"/>
+        <CountUp end={1000} duration="1350" />
         <p>try to guess wich word "i´m" thinking of</p>
         <ul>{showGuessResult}</ul>
         <ul>{wordLengthBoxes}</ul>
         <br></br>
-        <input className="inputGuess" type="text" value={guess} onChange={onTextChange} title="Your guess" placeholder="Your guess"/>
+        <input className="inputGuess" type="text" value={guess} onChange={onTextChange} title="Your guess" placeholder="Your guess" />
         <button onClick={onClickOk}>OK</button>
         <p>{chkWord}</p>
       </div>
