@@ -2,18 +2,19 @@ import { useState } from "react";
 import "./App.css";
 import React from "react";
 
-import getWord from "./getWord";
-import useToggle from "./toggle";
+import getWord from "./GetWord";
+import useToggle from "./Toggle";
 import CountUp from "react-countup"
+import { NavBar } from "./Navbar"
 
 function App() {
   const [correctWord, setWord] = useState("");
   const [guess, setText] = useState("");
   const [chkWord, wordle] = useState("");
+  const [name, setName] = useState("");
   const [guesses, setGuess] = useState([]);
   const [guessesResults, SetGuessResult] = useState([]);
-  const [name, setName] = useState("");
- 
+
   // Start game
   const [isToggled, toggle] = useToggle(false);
   if (isToggled === true) {
@@ -123,12 +124,11 @@ function App() {
   // set gamestate correctGuess/done and render result
   if (gameState === "correctGuess") {
     const duration = Math.round((endTime - startTime) / 1000);
-
     const numGuess = guesses.length;
     const wordLength = correctLetters.length;
 
     async function apiHighscore() {
-      await fetch("/api/highscore", {
+      await fetch("/result", {
         method: "POST",
         body: JSON.stringify({
           name,
@@ -140,18 +140,12 @@ function App() {
           "Content-Type": "application/json"
         }
       })
-
-      return (
-        <div className="done">
-          <h1>You have finished the Game</h1>
-        </div>
-      );
     }
-    
+
     return (
       <div className="correctGuess">
         <p>Your guess was correct, congratulation :)</p>
-        <span>Number of guesses: </span> {guesses.length}
+        <span>Number of guesses: </span> {numGuess}
         <p>Duration: {duration}s</p>
         <form onSubmit={apiHighscore}>
           <div>
@@ -173,7 +167,7 @@ function App() {
   return (
     <div className="game">
       <div className="wordle">
-
+        <NavBar />
         <h1>Welcome to Wordle</h1>
         <button onClick={toggle} autoFocus >Start game</button>
         <p>{correctWord}</p>
