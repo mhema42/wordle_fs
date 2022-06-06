@@ -1,4 +1,4 @@
-const words = [
+/* const words = [
     "test",
     "mats",
     "hello",
@@ -12,4 +12,12 @@ const getWord = () => {
     return correctWord;
 };
 
-export default getWord;
+export default getWord; */
+
+export default async function getWord() {
+    const res = await fetch("/word");
+    const resWord = await res.json();
+    const word = await resWord.word
+    console.log(word)
+    return await word
+}

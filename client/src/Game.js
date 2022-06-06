@@ -1,13 +1,6 @@
-import "./App.css";
-import CountUp from "react-countup"
-import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-// import getWord from "./GetWord";
-import useToggle from "./Toggle";
-import { NavBar } from "./Navbar"
-
-function App() {
+function Game({ correctWord }) {
   const [correctWord, setWord] = useState("");
   const [guess, setText] = useState("");
   const [chkWord, wordle] = useState("");
@@ -21,22 +14,14 @@ function App() {
   const [gameState, setGameState] = useState("playing");
   const [endTime, setEndtime] = useState(null);
 
-  useEffect(()  => {
-    const getWord =  async() => {
-    const res = await fetch("/word");
-    const data = await res.json();
-    setWord(data.word);
-  };
-
-  getWord();
-  }, []);
-
   // Start game
   const [isToggled, toggle] = useToggle(false);
   if (isToggled === true) {
-    
+    setWord(getWord());
     toggle(false);
   }
+
+
 
   // split correctWord to array and add object properties
   let correctLetters = correctWord.split("").map((letter, index) => ({
@@ -150,8 +135,9 @@ function App() {
         headers: {
           "Content-Type": "application/json"
         },
-      })
-    }
+        body: JSON.stringify(highscore),
+      });
+    };
 
     return (
       <div className="correctGuess">
@@ -172,27 +158,5 @@ function App() {
         </form>
       </div>
     )
-  }
-
-  // render game
-  return (
-    <div className="game">
-      <div className="wordle">
-        <NavBar />
-        <h1>Welcome to Wordle</h1>
-        <button onClick={toggle} autoFocus >Start game</button>
-        <p>{correctWord}</p>
-        <CountUp end={1000} duration="1350" />
-        <p>try to guess wich word "i´m" thinking of</p>
-        <ul>{showGuessResult}</ul>
-        <ul>{wordLengthBoxes}</ul>
-        <br></br>
-        <input className="inputGuess" type="text" value={guess} onChange={onTextChange} title="Your guess" placeholder="Your guess" />
-        <button onClick={onClickOk}>OK</button>
-        <p>{chkWord}</p>
-      </div>
-    </div>
-  );
-}
-
-export default App;
+  };
+};
