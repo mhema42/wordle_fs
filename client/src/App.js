@@ -2,6 +2,7 @@ import "./App.css";
 import CountUp from "react-countup"
 import React from "react";
 import { useEffect, useState } from "react";
+import Select from "react-select";
 
 // import getWord from "./GetWord";
 import useToggle from "./Toggle";
@@ -14,6 +15,7 @@ function App() {
   const [name, setName] = useState("");
   const [guesses, setGuess] = useState([]);
   const [guessesResults, SetGuessResult] = useState([]);
+  const [wordLength, setWordLength] = useState(5);
   // const correctWord=getWord();
 
   // timer
@@ -21,20 +23,20 @@ function App() {
   const [gameState, setGameState] = useState("playing");
   const [endTime, setEndtime] = useState(null);
 
-  useEffect(()  => {
-    const getWord =  async() => {
-    const res = await fetch("/word");
-    const data = await res.json();
-    setWord(data.word);
-  };
+  useEffect(() => {
+    const getWord = async () => {
+      const res = await fetch("/word/" + wordLength);
+      const data = await res.json();
+      setWord(data.word);
+    };
 
-  getWord();
+    getWord();
   }, []);
 
   // Start game
   const [isToggled, toggle] = useToggle(false);
   if (isToggled === true) {
-    
+
     toggle(false);
   }
 
@@ -174,13 +176,38 @@ function App() {
     )
   }
 
+  <button onClick={toggle} autoFocus >Start game</button>
+
+
+  const handleChange = e => {
+    setWordLength(e.value);
+  }
+
+  const options = [
+    {
+      label: "Four letters",
+      value: 4,
+    },
+    {
+      label: "Five letters",
+      value: 5,
+    },
+    {
+      label: "Six letters",
+      value: 6,
+    },
+  ];
+
   // render game
   return (
     <div className="game">
       <div className="wordle">
         <NavBar />
         <h1>Welcome to Wordle</h1>
-        <button onClick={toggle} autoFocus >Start game</button>
+        <Select options={options}
+            value={options.find(obj => obj.value === wordLength)}
+            onChange={handleChange}
+          />
         <p>{correctWord}</p>
         <CountUp end={1000} duration="1350" />
         <p>try to guess wich word "i´m" thinking of</p>

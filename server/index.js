@@ -16,9 +16,11 @@ app.get("/info", async (req, res) => {
   res.send(filebuf);
 });
 
-app.get("/word", async (req, res) => {
+app.get("/word/*", async (req, res) => {
+    const fileName = req.path;
+    const number = fileName.split("/")[2];
     const filebuf = await fs.readFile("./public/allwords.json");
-    const word = getWord(JSON.parse(filebuf), 4);
+    const word = getWord(JSON.parse(filebuf), number);
     res.status(201).json({ word });
 });
 

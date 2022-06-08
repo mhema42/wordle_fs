@@ -14,10 +14,22 @@ const getWord = () => {
 
 export default getWord; */
 
-export default async function getWord() {
+/* export default async function getWord() {
     const res = await fetch("/word");
     const resWord = await res.json();
     const word = await resWord.word
     console.log(word)
     return await word
-}
+} */
+
+export async function getWord(wordlength) {
+    await fetch("/word", {
+      method: "GET",
+      body: JSON.stringify({
+        wordlength,
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+  }
