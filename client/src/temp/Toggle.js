@@ -11,3 +11,15 @@ return [isToggled, toggle];
 };
 
 export default useToggle;
+
+// import useToggle from "./Toggle";
+
+  /* // Start game
+  const [isToggled, toggle] = useToggle(false);
+  if (isToggled === true) {
+
+    toggle(false);
+  } 
+
+  <button onClick={toggle} autoFocus >Start game</button>
+  */

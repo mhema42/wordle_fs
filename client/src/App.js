@@ -1,11 +1,9 @@
 import "./App.css";
 import CountUp from "react-countup"
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Select from "react-select";
 
-// import getWord from "./GetWord";
-import useToggle from "./Toggle";
 import { NavBar } from "./Navbar"
 
 function App() {
@@ -15,30 +13,12 @@ function App() {
   const [name, setName] = useState("");
   const [guesses, setGuess] = useState([]);
   const [guessesResults, SetGuessResult] = useState([]);
-  const [wordLength, setWordLength] = useState(5);
-  // const correctWord=getWord();
+  const [wordLength, setWordLength] = useState(null);
 
   // timer
   const [startTime,] = useState(new Date());
   const [gameState, setGameState] = useState("playing");
   const [endTime, setEndtime] = useState(null);
-
-  useEffect(() => {
-    const getWord = async () => {
-      const res = await fetch("/word/" + wordLength);
-      const data = await res.json();
-      setWord(data.word);
-    };
-
-    getWord();
-  }, []);
-
-  // Start game
-  const [isToggled, toggle] = useToggle(false);
-  if (isToggled === true) {
-
-    toggle(false);
-  }
 
   // split correctWord to array and add object properties
   let correctLetters = correctWord.split("").map((letter, index) => ({
@@ -176,24 +156,28 @@ function App() {
     )
   }
 
-  <button onClick={toggle} autoFocus >Start game</button>
-
+  const getWord = async (value) => {
+    const res = await fetch("/word/" + value);
+    const data = await res.json();
+    setWord(data.word);
+  };
 
   const handleChange = e => {
     setWordLength(e.value);
+    getWord(e.value);
   }
 
   const options = [
     {
-      label: "Four letters",
+      label: "fyra bokstäver",
       value: 4,
     },
     {
-      label: "Five letters",
+      label: "fem bokstäver",
       value: 5,
     },
     {
-      label: "Six letters",
+      label: "sex bokstäver",
       value: 6,
     },
   ];
@@ -214,7 +198,7 @@ function App() {
         <ul>{showGuessResult}</ul>
         <ul>{wordLengthBoxes}</ul>
         <br></br>
-        <input className="inputGuess" type="text" value={guess} onChange={onTextChange} title="Your guess" placeholder="Your guess" />
+        <input className="inputGuess" type="text" value={guess} onChange={onTextChange} title="Your guess" placeholder="Your guess" autoFocus />
         <button onClick={onClickOk}>OK</button>
         <p>{chkWord}</p>
       </div>

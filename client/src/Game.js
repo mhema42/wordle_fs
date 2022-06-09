@@ -1,27 +1,20 @@
+import "./App.css";
+import CountUp from "react-countup"
+import React from "react";
 import { useState } from "react";
+import { NavBar } from "./Navbar"
 
 function Game({ correctWord }) {
-  const [correctWord, setWord] = useState("");
   const [guess, setText] = useState("");
   const [chkWord, wordle] = useState("");
   const [name, setName] = useState("");
   const [guesses, setGuess] = useState([]);
   const [guessesResults, SetGuessResult] = useState([]);
-  // const correctWord=getWord();
 
   // timer
   const [startTime,] = useState(new Date());
   const [gameState, setGameState] = useState("playing");
   const [endTime, setEndtime] = useState(null);
-
-  // Start game
-  const [isToggled, toggle] = useToggle(false);
-  if (isToggled === true) {
-    setWord(getWord());
-    toggle(false);
-  }
-
-
 
   // split correctWord to array and add object properties
   let correctLetters = correctWord.split("").map((letter, index) => ({
@@ -135,9 +128,8 @@ function Game({ correctWord }) {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(highscore),
-      });
-    };
+      })
+    }
 
     return (
       <div className="correctGuess">
@@ -158,5 +150,25 @@ function Game({ correctWord }) {
         </form>
       </div>
     )
-  };
-};
+  }
+
+  // render game
+  return (
+    <div className="game">
+      <div className="wordle">
+        <NavBar />
+        <p>{correctWord}</p>
+        <CountUp end={1000} duration="1350" />
+        <p>try to guess wich word "i´m" thinking of</p>
+        <ul>{showGuessResult}</ul>
+        <ul>{wordLengthBoxes}</ul>
+        <br></br>
+        <input className="inputGuess" type="text" value={guess} onChange={onTextChange} title="Your guess" placeholder="Your guess" autoFocus />
+        <button onClick={onClickOk}>OK</button>
+        <p>{chkWord}</p>
+      </div>
+    </div>
+  );
+}
+
+export default Game;
