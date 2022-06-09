@@ -22,7 +22,7 @@ export default getWord; */
     return await word
 } */
 
-export async function getWord(wordlength) {
+/* export async function getWord(wordlength) {
     await fetch("/word", {
       method: "GET",
       body: JSON.stringify({
@@ -32,4 +32,24 @@ export async function getWord(wordlength) {
         "Content-Type": "application/json"
       },
     })
-  }
+  } */
+
+
+  import { useState } from "react";
+
+function GetWord(wordLength) {
+  const [word, setWord] = useState("");
+  console.log("iwas n getword")
+
+  const getWord = async () => {
+    const res = await fetch("/word/" + wordLength);
+    const data = await res.json();
+    setWord(data.word);
+  };
+
+  getWord(wordLength);
+
+  return word;
+}
+
+export default GetWord;
