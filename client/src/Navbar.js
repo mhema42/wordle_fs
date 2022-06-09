@@ -1,4 +1,4 @@
-export function NavBar() {
+function NavBar() {
     return (
         <div>
             <a href="http://localhost:5080/">Wordle</a>
@@ -7,3 +7,5 @@ export function NavBar() {
         </div>
     )
 }
+
+export default NavBar;

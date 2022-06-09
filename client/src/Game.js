@@ -2,7 +2,6 @@ import "./App.css";
 import CountUp from "react-countup"
 import React from "react";
 import { useState } from "react";
-import { NavBar } from "./Navbar"
 
 function Game({ correctWord }) {
   const [guess, setText] = useState("");
@@ -55,7 +54,7 @@ function Game({ correctWord }) {
 
       // check if guess contains correct amount of letters
       if (letters.length !== correctLetters.length) {
-        wordle("your guess must contain " + correctLetters.length + " letters");
+        wordle("Guess must have " + correctLetters.length + " letters");
       }
 
       // check if guess contains correct, incorrect or missplaced letters
@@ -110,7 +109,7 @@ function Game({ correctWord }) {
       )
     });
 
-  // set gamestate correctGuess/done and render result
+  //  game is won, render result and POST Highscore
   if (gameState === "correctGuess") {
     const duration = Math.round((endTime - startTime) / 1000);
     const numGuess = guesses.length;
@@ -156,13 +155,11 @@ function Game({ correctWord }) {
   return (
     <div className="game">
       <div className="wordle">
-        <NavBar />
         <p>{correctWord}</p>
         <CountUp end={1000} duration="1350" />
         <p>try to guess wich word "i´m" thinking of</p>
         <ul>{showGuessResult}</ul>
         <ul>{wordLengthBoxes}</ul>
-        <br></br>
         <input className="inputGuess" type="text" value={guess} onChange={onTextChange} title="Your guess" placeholder="Your guess" autoFocus />
         <button onClick={onClickOk}>OK</button>
         <p>{chkWord}</p>
