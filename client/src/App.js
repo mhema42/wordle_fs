@@ -57,7 +57,7 @@ function App() {
     <div className="game">
       <div className="wordle">
         <NavBar />
-        <h1>Welcome to Wordle</h1>
+        <h1>Welcome to my Wordlegame</h1>
         <Select options={options}
           value={options.find(obj => obj.value === wordLength)}
           onChange={handleChange}
