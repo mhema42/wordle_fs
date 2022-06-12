@@ -8,16 +8,23 @@ import Game from "./Game";
 function App() {
   const [correctWord, setWord] = useState("");
   const [wordLength, setWordLength] = useState(null);
+  const [unique, setUnique] = useState(false);
 
-  const getWord = async (value) => {
-    const res = await fetch("/word/" + value);
+  const getWord = async (letters, unique) => {
+    const res = await fetch("/word/" + letters + "/" + unique);
     const data = await res.json();
     setWord(data.word);
   };
 
+  // handler for unique letters checkbox
+  const checkHandler = () => {
+    setUnique(!unique)
+  }
+
+  // handler for wordlength select
   const handleChange = e => {
     setWordLength(e.value);
-    getWord(e.value);
+    getWord(e.value, unique);
   }
 
   const options = [
@@ -57,7 +64,14 @@ function App() {
     <div className="game">
       <div className="wordle">
         <NavBar />
-        <h1>Welcome to my Wordlegame</h1>
+        <h1>Welcome to Wordle</h1>
+        Check box for only unique letters
+        <input
+          type="checkbox"
+          id="checkbox"
+          checked={unique}
+          onChange={checkHandler}
+        />
         <Select options={options}
           value={options.find(obj => obj.value === wordLength)}
           onChange={handleChange}
