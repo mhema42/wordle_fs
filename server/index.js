@@ -3,7 +3,7 @@ import fs from "fs/promises";
 
 import getHighscore from "./src/get.js";
 import postHighscore from "./src/post.js";
-import { getWord } from "./src/word.js";
+import { getWords } from "./src/word.js";
 
 const app = express();
 
@@ -19,8 +19,9 @@ app.get("/info", async (req, res) => {
 app.get("/word/*", async (req, res) => {
     const fileName = req.path;
     const number = fileName.split("/")[2];
-    const filebuf = await fs.readFile("./public/allwords.json");
-    const word = getWord(JSON.parse(filebuf), number);
+    const unique = fileName.split("/")[3];
+    const filebuf = await fs.readFile("./src/allwords.json");
+    const word = getWords(JSON.parse(filebuf), number, unique);
     res.status(201).json({ word });
 });
 
