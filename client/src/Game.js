@@ -3,7 +3,7 @@ import CountUp from "react-countup"
 import React from "react";
 import { useState } from "react";
 
-function Game({ correctWord }) {
+function Game({ correctWord, unique }) {
   const [guess, setText] = useState("");
   const [chkWord, wordle] = useState("");
   const [name, setName] = useState("");
@@ -121,8 +121,10 @@ function Game({ correctWord }) {
         body: JSON.stringify({
           name,
           numGuess,
+          guesses,
           duration,
           wordLength,
+          unique
         }),
         headers: {
           "Content-Type": "application/json"

@@ -46,7 +46,7 @@ function App() {
     if (wordLength !== null) {
       return (
         <>
-          <Game correctWord={correctWord} />
+          <Game correctWord={correctWord} unique={unique} />
         </>
       )
     }
