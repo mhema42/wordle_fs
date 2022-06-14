@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-</head>
-<body>
-    <h1 id="headline">Information page</h1>
-    <p>This is where information about Wordlegame should be</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="./info.css" />
+
+    <title>Wordle information</title>
+  </head>
+  <body>
+    <div>
+      <div class="page">
+        <div class="navBar">
+          <a href="http://localhost:5080/">Wordle</a>
+          <a href="http://localhost:5080/info">Information</a>
+          <a href="http://localhost:5080/highscore">Highscore</a>
+        </div>
+        <h1 id="headline">Information page</h1>
+        <p>
+          In the navigation bar, you can choose WORDLE to play the game, go to
+          this INFORMATION page, or list the HIGHSCORE of players who has
+          entered their name.
+        </p>
+        <p>
+          To play the game, you have the option to select if you want only
+          unique letters or if there can be two or more of the same letter in
+          the word to guess for. Then you choose length on word to guess for (4,
+          5 or 6 letters).
+        </p>
+        <p>
+          After you made your choise, you enter a word you guess is correct and
+          the game shows if a letter in the guessed word is correct (green
+          color), correct but missplaced (yellow color) and incorrect (red
+          color), you keep on guessing until you guessed the correct word.
+        </p>
+        <p>
+          When you guessed the correct word, the game will display how many
+          guesses you made and your time. And you have the option to enter your
+          name to send result to highscore-list.
+        </p>
+        <p>_________________________________</p>
+        <p>
+          (c) This wordle Game is produced by Mats Hemå in his education -
+          Developer in Java and JavaScript.
+        </p>
+      </div>
+    </div>
+  </body>
 </html>

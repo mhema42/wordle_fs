@@ -1,6 +1,6 @@
 function NavBar() {
     return (
-        <div>
+        <div className="navBar">
             <a href="http://localhost:5080/">Wordle</a>
             <a href="http://localhost:5080/info">Information</a>
             <a href="http://localhost:5080/highscore">Highscore</a>

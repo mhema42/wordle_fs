@@ -1,9 +1,9 @@
-import "./App.css";
 import { useState } from "react";
 import Select from "react-select";
 
 import NavBar from "./Navbar"
 import Game from "./Game";
+import Highscore from "./Highscore";
 
 function App() {
   const [correctWord, setWord] = useState("");
@@ -22,7 +22,7 @@ function App() {
   }
 
   // handler for wordlength select
-  const handleChange = e => {
+  const selectHandler = e => {
     setWordLength(e.value);
     getWord(e.value, unique);
   }
@@ -42,6 +42,11 @@ function App() {
     },
   ];
 
+  const styles = {
+    fontSize: 14,
+    color: 'red',
+  }
+
   const Play = () => {
     if (wordLength !== null) {
       return (
@@ -52,9 +57,29 @@ function App() {
     }
     else {
       return (
-        <>
-          <h1>Want to play...?</h1>
-        </>
+        <div>
+          <h2>...ready to play?</h2>
+          <div className="check">
+            <input
+              checked={unique}
+              className="checkbox"
+              onChange={checkHandler}
+              title="Unique letters"
+              type="checkbox"
+            />
+            - only unique letters
+          </div>
+          <Select
+            autoFocus
+            className="select"
+            placeholder="select length of word"
+            onChange={selectHandler}
+            options={options}
+            style={styles.select}
+            title="select length of word"
+            value={options.find(obj => obj.value === wordLength)}
+          />
+        </div>
       )
     }
   }
@@ -63,20 +88,9 @@ function App() {
   return (
     <div className="game">
       <div className="wordle">
-        <NavBar />
+        <NavBar className="navBar" />
         <h1>Welcome to Wordle</h1>
-        Check box for only unique letters
-        <input
-          type="checkbox"
-          id="checkbox"
-          checked={unique}
-          onChange={checkHandler}
-        />
-        <Select options={options}
-          value={options.find(obj => obj.value === wordLength)}
-          onChange={handleChange}
-        />
-        <Play />
+        <Play className="play" />
       </div>
     </div>
   );

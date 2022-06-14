@@ -1,0 +1,124 @@
+body {
+    min-width: 20rem;
+    font-family: cursive;
+    background: #251E21;
+    color: white;
+}
+
+.navBar {
+    display: inline;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-radius: 0.3rem;
+    background-color: rgb(255, 255, 255);
+}
+
+.navBar a {
+    color: black;
+    margin: 1rem;
+    text-decoration: none;
+    text-shadow: 0.5px 0.5px 2px rgb(102, 92, 77);
+}
+
+.wordle {
+    margin: auto;
+    text-align: center;
+    min-width: 20rem;
+    height: 100vh;
+}
+
+.wordle h1 {
+    margin-bottom: 0.2rem;
+}
+
+.game {
+    background-image: url("../public/img/pexels-photo-716398.webp");
+    background-repeat: no-repeat;
+    background-position-x: 52%;
+}
+
+.play {
+    border-top: 6rem;
+}
+
+.play,
+p {
+    margin: 0.2rem;
+}
+
+li {
+    list-style-type: none;
+    margin: 5px;
+}
+
+input {
+    color: red;
+    border-radius: 2px;
+    height: 20px;
+    width: 80px;
+}
+
+.correct,
+.incorrect,
+.missplaced,
+.boxcolor {
+    border-radius: 3px;
+    display: inline-block;
+    height: 35px;
+    font-family: monospace;
+    font-size: xx-large;
+    margin: 4px;
+    padding-top: 5px;
+    text-transform: uppercase;
+    width: 40px;
+}
+
+.correct {
+    background-color: rgb(43, 121, 43);
+}
+
+.incorrect {
+    background-color: rgb(99, 38, 38);
+}
+
+.missplaced {
+    background-color: rgb(224, 224, 138);
+}
+
+.boxcolor {
+    background-color: grey;
+    color: grey;
+}
+
+.hide {
+    display: none;
+}
+
+.correctGuess {
+    text-align: center;
+}
+
+.checkbox {
+    width: 1rem;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select {
+    color: black;
+    margin: auto;
+    margin-top: 0.5rem;
+    width: 14rem;
+}
+
+h2 {
+    margin-top: 0px;
+}
+
+.countUp {
+    margin: 0.2rem;
+}

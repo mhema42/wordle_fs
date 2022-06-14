@@ -1,13 +1,14 @@
-import "./App.css";
 import CountUp from "react-countup"
 import React from "react";
 import { useState } from "react";
 
+// import Highscore from "./Highscore"
+
 function Game({ correctWord, unique }) {
-  const [guess, setText] = useState("");
+  const [guess, setGuess] = useState("");
   const [chkWord, wordle] = useState("");
   const [name, setName] = useState("");
-  const [guesses, setGuess] = useState([]);
+  const [guesses, setGuesses] = useState([]);
   const [guessesResults, SetGuessResult] = useState([]);
 
   // timer
@@ -24,13 +25,10 @@ function Game({ correctWord, unique }) {
   }));
 
   //input guessed word
-  const onTextChange = (event) => {
-    setText(event.target.value.toLowerCase());
-  };
-
-  const onClickOk = () => {
-    setText("");
-    setGuess([
+  const checkGuess = ev => {
+    ev.preventDefault();
+    setGuess("");
+    setGuesses([
       ...guesses,
       {
         word: guess,
@@ -140,30 +138,47 @@ function Game({ correctWord, unique }) {
         <form onSubmit={apiHighscore}>
           <div>
             <input
-              autoComplete="Fyll i ditt namn"
-              placeholder="Namn"
+              autoFocus
+              className="input"
+              onChange={(ev) => setName(ev.target.value)}
+              placeholder="Enter name"
               required
               type="text"
               value={name}
-              onChange={(ev) => setName(ev.target.value)}
             />
           </div>
         </form>
       </div>
     )
-  }
+  };
 
   // render game
   return (
     <div className="game">
       <div className="wordle">
-        <p>{correctWord}</p>
-        <CountUp end={1000} duration="1350" />
+        <h2>...yes game on!</h2>
         <p>try to guess wich word "i´m" thinking of</p>
+        time...
+        <CountUp
+          className="countUp"
+          end={1000}
+          duration="1350"
+        />
+        sec
         <ul>{showGuessResult}</ul>
         <ul>{wordLengthBoxes}</ul>
-        <input className="inputGuess" type="text" value={guess} onChange={onTextChange} title="Your guess" placeholder="Your guess" autoFocus />
-        <button onClick={onClickOk}>OK</button>
+        <form onSubmit={checkGuess}>
+          <input
+            autoFocus
+            className="input"
+            onChange={(ev) => setGuess(ev.target.value)}
+            placeholder="Enter guess"
+            required
+            type="text"
+            value={guess}
+            title="Enter guess"
+          />
+        </form>
         <p>{chkWord}</p>
       </div>
     </div>

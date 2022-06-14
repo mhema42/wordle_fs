@@ -9,6 +9,7 @@ const app = express();
 
 app.use(express.json())
 app.use(express.static("../client/build/"));
+app.use(express.static("../server/public/"));
 
 app.get("/info", async (req, res) => {
   const filebuf = await fs.readFile("./public/info.html");
